@@ -1,0 +1,406 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "c71cf2ca-38ad-428e-af3c-d302fc5e6830",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.datasets import load_diabetes\n",
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "b7e0531b-325b-44c1-a8e1-4abc0153596d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Dataset Keys:\n",
+      " dict_keys(['data', 'target', 'frame', 'DESCR', 'feature_names', 'data_filename', 'target_filename', 'data_module'])\n"
+     ]
+    }
+   ],
+   "source": [
+    "diabetes = load_diabetes()\n",
+    "\n",
+    "print(\"Dataset Keys:\\n\", diabetes.keys())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "182b9323-ba58-4964-ae58-ff51c45e9531",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([151.,  75., 141., 206., 135.,  97., 138.,  63., 110., 310., 101.,\n",
+       "        69., 179., 185., 118., 171., 166., 144.,  97., 168.,  68.,  49.,\n",
+       "        68., 245., 184., 202., 137.,  85., 131., 283., 129.,  59., 341.,\n",
+       "        87.,  65., 102., 265., 276., 252.,  90., 100.,  55.,  61.,  92.,\n",
+       "       259.,  53., 190., 142.,  75., 142., 155., 225.,  59., 104., 182.,\n",
+       "       128.,  52.,  37., 170., 170.,  61., 144.,  52., 128.,  71., 163.,\n",
+       "       150.,  97., 160., 178.,  48., 270., 202., 111.,  85.,  42., 170.,\n",
+       "       200., 252., 113., 143.,  51.,  52., 210.,  65., 141.,  55., 134.,\n",
+       "        42., 111.,  98., 164.,  48.,  96.,  90., 162., 150., 279.,  92.,\n",
+       "        83., 128., 102., 302., 198.,  95.,  53., 134., 144., 232.,  81.,\n",
+       "       104.,  59., 246., 297., 258., 229., 275., 281., 179., 200., 200.,\n",
+       "       173., 180.,  84., 121., 161.,  99., 109., 115., 268., 274., 158.,\n",
+       "       107.,  83., 103., 272.,  85., 280., 336., 281., 118., 317., 235.,\n",
+       "        60., 174., 259., 178., 128.,  96., 126., 288.,  88., 292.,  71.,\n",
+       "       197., 186.,  25.,  84.,  96., 195.,  53., 217., 172., 131., 214.,\n",
+       "        59.,  70., 220., 268., 152.,  47.,  74., 295., 101., 151., 127.,\n",
+       "       237., 225.,  81., 151., 107.,  64., 138., 185., 265., 101., 137.,\n",
+       "       143., 141.,  79., 292., 178.,  91., 116.,  86., 122.,  72., 129.,\n",
+       "       142.,  90., 158.,  39., 196., 222., 277.,  99., 196., 202., 155.,\n",
+       "        77., 191.,  70.,  73.,  49.,  65., 263., 248., 296., 214., 185.,\n",
+       "        78.,  93., 252., 150.,  77., 208.,  77., 108., 160.,  53., 220.,\n",
+       "       154., 259.,  90., 246., 124.,  67.,  72., 257., 262., 275., 177.,\n",
+       "        71.,  47., 187., 125.,  78.,  51., 258., 215., 303., 243.,  91.,\n",
+       "       150., 310., 153., 346.,  63.,  89.,  50.,  39., 103., 308., 116.,\n",
+       "       145.,  74.,  45., 115., 264.,  87., 202., 127., 182., 241.,  66.,\n",
+       "        94., 283.,  64., 102., 200., 265.,  94., 230., 181., 156., 233.,\n",
+       "        60., 219.,  80.,  68., 332., 248.,  84., 200.,  55.,  85.,  89.,\n",
+       "        31., 129.,  83., 275.,  65., 198., 236., 253., 124.,  44., 172.,\n",
+       "       114., 142., 109., 180., 144., 163., 147.,  97., 220., 190., 109.,\n",
+       "       191., 122., 230., 242., 248., 249., 192., 131., 237.,  78., 135.,\n",
+       "       244., 199., 270., 164.,  72.,  96., 306.,  91., 214.,  95., 216.,\n",
+       "       263., 178., 113., 200., 139., 139.,  88., 148.,  88., 243.,  71.,\n",
+       "        77., 109., 272.,  60.,  54., 221.,  90., 311., 281., 182., 321.,\n",
+       "        58., 262., 206., 233., 242., 123., 167.,  63., 197.,  71., 168.,\n",
+       "       140., 217., 121., 235., 245.,  40.,  52., 104., 132.,  88.,  69.,\n",
+       "       219.,  72., 201., 110.,  51., 277.,  63., 118.,  69., 273., 258.,\n",
+       "        43., 198., 242., 232., 175.,  93., 168., 275., 293., 281.,  72.,\n",
+       "       140., 189., 181., 209., 136., 261., 113., 131., 174., 257.,  55.,\n",
+       "        84.,  42., 146., 212., 233.,  91., 111., 152., 120.,  67., 310.,\n",
+       "        94., 183.,  66., 173.,  72.,  49.,  64.,  48., 178., 104., 132.,\n",
+       "       220.,  57.])"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "diabetes[\"target\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "3fb5144d-5c60-44c2-b916-f3379d54d5ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Number of Rows and Columns:\n",
+      " Rows: 442, Columns: 10\n"
+     ]
+    }
+   ],
+   "source": [
+    "rows, cols = diabetes.data.shape\n",
+    "print(\"\\nNumber of Rows and Columns:\\n\", f\"Rows: {rows}, Columns: {cols}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "9fa05e2a-b522-4bea-9b45-3b6c230aa460",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>0</th>\n",
+       "      <th>1</th>\n",
+       "      <th>2</th>\n",
+       "      <th>3</th>\n",
+       "      <th>4</th>\n",
+       "      <th>5</th>\n",
+       "      <th>6</th>\n",
+       "      <th>7</th>\n",
+       "      <th>8</th>\n",
+       "      <th>9</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>434</th>\n",
+       "      <td>0.016281</td>\n",
+       "      <td>-0.044642</td>\n",
+       "      <td>0.001339</td>\n",
+       "      <td>0.008101</td>\n",
+       "      <td>0.005311</td>\n",
+       "      <td>0.010899</td>\n",
+       "      <td>0.030232</td>\n",
+       "      <td>-0.039493</td>\n",
+       "      <td>-0.045424</td>\n",
+       "      <td>0.032059</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>435</th>\n",
+       "      <td>-0.012780</td>\n",
+       "      <td>-0.044642</td>\n",
+       "      <td>-0.023451</td>\n",
+       "      <td>-0.040099</td>\n",
+       "      <td>-0.016704</td>\n",
+       "      <td>0.004636</td>\n",
+       "      <td>-0.017629</td>\n",
+       "      <td>-0.002592</td>\n",
+       "      <td>-0.038460</td>\n",
+       "      <td>-0.038357</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>436</th>\n",
+       "      <td>-0.056370</td>\n",
+       "      <td>-0.044642</td>\n",
+       "      <td>-0.074108</td>\n",
+       "      <td>-0.050427</td>\n",
+       "      <td>-0.024960</td>\n",
+       "      <td>-0.047034</td>\n",
+       "      <td>0.092820</td>\n",
+       "      <td>-0.076395</td>\n",
+       "      <td>-0.061176</td>\n",
+       "      <td>-0.046641</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>437</th>\n",
+       "      <td>0.041708</td>\n",
+       "      <td>0.050680</td>\n",
+       "      <td>0.019662</td>\n",
+       "      <td>0.059744</td>\n",
+       "      <td>-0.005697</td>\n",
+       "      <td>-0.002566</td>\n",
+       "      <td>-0.028674</td>\n",
+       "      <td>-0.002592</td>\n",
+       "      <td>0.031193</td>\n",
+       "      <td>0.007207</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>438</th>\n",
+       "      <td>-0.005515</td>\n",
+       "      <td>0.050680</td>\n",
+       "      <td>-0.015906</td>\n",
+       "      <td>-0.067642</td>\n",
+       "      <td>0.049341</td>\n",
+       "      <td>0.079165</td>\n",
+       "      <td>-0.028674</td>\n",
+       "      <td>0.034309</td>\n",
+       "      <td>-0.018114</td>\n",
+       "      <td>0.044485</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>439</th>\n",
+       "      <td>0.041708</td>\n",
+       "      <td>0.050680</td>\n",
+       "      <td>-0.015906</td>\n",
+       "      <td>0.017293</td>\n",
+       "      <td>-0.037344</td>\n",
+       "      <td>-0.013840</td>\n",
+       "      <td>-0.024993</td>\n",
+       "      <td>-0.011080</td>\n",
+       "      <td>-0.046883</td>\n",
+       "      <td>0.015491</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>440</th>\n",
+       "      <td>-0.045472</td>\n",
+       "      <td>-0.044642</td>\n",
+       "      <td>0.039062</td>\n",
+       "      <td>0.001215</td>\n",
+       "      <td>0.016318</td>\n",
+       "      <td>0.015283</td>\n",
+       "      <td>-0.028674</td>\n",
+       "      <td>0.026560</td>\n",
+       "      <td>0.044529</td>\n",
+       "      <td>-0.025930</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>441</th>\n",
+       "      <td>-0.045472</td>\n",
+       "      <td>-0.044642</td>\n",
+       "      <td>-0.073030</td>\n",
+       "      <td>-0.081413</td>\n",
+       "      <td>0.083740</td>\n",
+       "      <td>0.027809</td>\n",
+       "      <td>0.173816</td>\n",
+       "      <td>-0.039493</td>\n",
+       "      <td>-0.004222</td>\n",
+       "      <td>0.003064</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "            0         1         2         3         4         5         6  \\\n",
+       "434  0.016281 -0.044642  0.001339  0.008101  0.005311  0.010899  0.030232   \n",
+       "435 -0.012780 -0.044642 -0.023451 -0.040099 -0.016704  0.004636 -0.017629   \n",
+       "436 -0.056370 -0.044642 -0.074108 -0.050427 -0.024960 -0.047034  0.092820   \n",
+       "437  0.041708  0.050680  0.019662  0.059744 -0.005697 -0.002566 -0.028674   \n",
+       "438 -0.005515  0.050680 -0.015906 -0.067642  0.049341  0.079165 -0.028674   \n",
+       "439  0.041708  0.050680 -0.015906  0.017293 -0.037344 -0.013840 -0.024993   \n",
+       "440 -0.045472 -0.044642  0.039062  0.001215  0.016318  0.015283 -0.028674   \n",
+       "441 -0.045472 -0.044642 -0.073030 -0.081413  0.083740  0.027809  0.173816   \n",
+       "\n",
+       "            7         8         9  \n",
+       "434 -0.039493 -0.045424  0.032059  \n",
+       "435 -0.002592 -0.038460 -0.038357  \n",
+       "436 -0.076395 -0.061176 -0.046641  \n",
+       "437 -0.002592  0.031193  0.007207  \n",
+       "438  0.034309 -0.018114  0.044485  \n",
+       "439 -0.011080 -0.046883  0.015491  \n",
+       "440  0.026560  0.044529 -0.025930  \n",
+       "441 -0.039493 -0.004222  0.003064  "
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df = pd.DataFrame(diabetes.data)\n",
+    "df.head(8)\n",
+    "df.tail(8)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "e429aaac-e4c6-494b-9989-e54891b98779",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Feature Names:\n",
+      " ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"\\nFeature Names:\\n\", diabetes.feature_names)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "e6e30138-2323-4ec7-afa2-c085c596f368",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "Dataset Description:\n",
+      " .. _diabetes_dataset:\n",
+      "\n",
+      "Diabetes dataset\n",
+      "----------------\n",
+      "\n",
+      "Ten baseline variables, age, sex, body mass index, average blood\n",
+      "pressure, and six blood serum measurements were obtained for each of n =\n",
+      "442 diabetes patients, as well as the response of interest, a\n",
+      "quantitative measure of disease progression one year after baseline.\n",
+      "\n",
+      "**Data Set Characteristics:**\n",
+      "\n",
+      ":Number of Instances: 442\n",
+      "\n",
+      ":Number of Attributes: First 10 columns are numeric predictive values\n",
+      "\n",
+      ":Target: Column 11 is a quantitative measure of disease progression one year after baseline\n",
+      "\n",
+      ":Attribute Information:\n",
+      "    - age     age in years\n",
+      "    - sex\n",
+      "    - bmi     body mass index\n",
+      "    - bp      average blood pressure\n",
+      "    - s1      tc, total serum cholesterol\n",
+      "    - s2      ldl, low-density lipoproteins\n",
+      "    - s3      hdl, high-density lipoproteins\n",
+      "    - s4      tch, total cholesterol / HDL\n",
+      "    - s5      ltg, possibly log of serum triglycerides level\n",
+      "    - s6      glu, blood sugar level\n",
+      "\n",
+      "Note: Each of these 10 feature variables have been mean centered and scaled by the standard deviation times the square root of `n_samples` (i.e. the sum of squares of each column totals 1).\n",
+      "\n",
+      "Source URL:\n",
+      "https://www4.stat.ncsu.edu/~boos/var.select/diabetes.html\n",
+      "\n",
+      "For more information see:\n",
+      "Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) \"Least Angle Regression,\" Annals of Statistics (with discussion), 407-499.\n",
+      "(https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"\\nDataset Description:\\n\", diabetes.DESCR)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "726308d5-f92b-4bbe-91c6-2e3f2d5be832",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

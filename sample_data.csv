@@ -1,0 +1,14 @@
+Name,Age,Grade,Subject
+Alice,25,A,Math
+Bob,30,B,Science
+Charlie,,A,Math
+,22,,Science
+Alice,25,A,Math
+Bob,30,B,Science
+David,35,C,
+,,B,Math
+Eve,28,,Science
+Frank,32,A,Math
+Alice,25,A,Math
+Charlie,,A,Math
+Bob,30,B,Science
